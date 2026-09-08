@@ -1,4 +1,11 @@
+import dotenv from "dotenv";
 import WebSocket from "ws";
+
+dotenv.config();
+
+const host = process.env.WS_HOST ?? "127.0.0.1";
+const port = process.env.WS_PORT ?? "8765";
+const websocketUrl = `ws://${host}:${port}`;
 
 let retryTimer: NodeJS.Timeout | null = null;
 let retryCount = 0;
@@ -20,7 +27,7 @@ const scheduleReconnect = () => {
 };
 
 const connect = () => {
-    const socket = new WebSocket("ws://127.0.0.1:8765", {
+    const socket = new WebSocket(websocketUrl, {
         timeout: 30000
     });
 
