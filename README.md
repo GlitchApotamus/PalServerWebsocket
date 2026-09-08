@@ -94,6 +94,74 @@ WS_RETRY_INTERVAL_MS=1000
 
 ## Troubleshooting
 
+### Common errors and fixes
+
+#### ECONNREFUSED
+
+This usually means the target WebSocket server is not running or is listening on a different port.
+
+Fix:
+
+- confirm the server is started
+- check the value in `WS_HOST`
+- verify the value in `WS_PORT`
+- make sure the server is actually listening on that socket
+- confirm there is no firewall or local security rule blocking the connection
+
+#### ENOTFOUND
+
+This means the hostname cannot be resolved.
+
+Fix:
+
+- use a valid IP address or hostname
+- verify DNS resolution
+- ensure the machine can reach the target host
+
+#### ETIMEDOUT / EHOSTUNREACH
+
+This usually means the host is unreachable or the network path is timing out.
+
+Fix:
+
+- check network connectivity
+- verify the host is online
+- confirm the correct LAN/WAN address
+- ensure the server is reachable from the machine running this client
+
+#### ECONNRESET / EPIPE
+
+This often happens when the remote server closes the socket unexpectedly or the connection is interrupted.
+
+Fix:
+
+- check whether the server restarted or crashed
+- verify the server is not dropping idle connections
+- restart the server if needed
+- confirm the client and server are using compatible protocols
+
+#### EAI_AGAIN
+
+This is commonly a DNS or transient network issue.
+
+Fix:
+
+- retry later
+- check your internet or LAN connectivity
+- confirm the hostname resolves correctly
+- verify the host is reachable before retrying
+
+#### Generic WebSocket error
+
+This may mean the server accepted the connection but then disconnected or sent invalid data.
+
+Fix:
+
+- check the server logs
+- verify the WebSocket endpoint is correct
+- check for protocol mismatches or malformed messages
+- confirm the server is still running and healthy
+
 ### Connection refused
 
 This usually means the WebSocket server is not running yet or the host/port in `.env` is incorrect.
