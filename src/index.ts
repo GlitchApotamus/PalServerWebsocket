@@ -117,7 +117,7 @@ const connect = () => {
         }
 
         if (commonSocketErrorCodes.has(socketError.code)) {
-            console.error("Common socket error:", socketError);
+            // console.error("Common socket error:", socketError);
             scheduleReconnect();
             return;
         }
